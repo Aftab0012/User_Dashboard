@@ -37,6 +37,54 @@ const addUser = async (req, res) => {
   }
 };
 
+async function getAllUsers(req, res) {
+  try {
+    // Implement logic to fetch all users from the database
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching users' });
+  }
+}
+
+async function updateUser(req, res) {
+  const userId = req.params._id; // Get the user ID from the request parameters
+  const updatedUserData = req.body;
+  try {
+    // Implement logic to update a user by userId with updatedUserData
+    const updatedUser = await User.findByIdAndUpdate(userId, updatedUserData, {
+      new: true, // Return the updated user
+      runValidators: true, // Run validators for updates
+    });
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error updating user' });
+  }
+}
+
+async function deleteUser(req, res) {
+  const userId = req.params._id; // Get the user ID from the request parameters
+  try {
+    // Implement logic to delete a user by userId
+    const deletedUser = await User.findByIdAndDelete(userId);
+    if (!deletedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error deleting user' });
+  }
+}
+
 module.exports = {
   addUser,
+  getAllUsers,
+  updateUser,
+  deleteUser,
 };
