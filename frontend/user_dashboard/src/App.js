@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
-import Form from './Component/Form';
+import Form from './Component/Forms/Form';
 import LoadingAnimation from './Animation/Animation';
+import AddNewUser from './Component/Forms/AddNewUser';
+import Navbar from './Navbar/Navbar';
 
 function App() {
   const [data, setData] = useState([]);
   const [userId, setUserId] = useState('');
   const [form, setForm] = useState(false);
   const [animation, setAnimation] = useState(true);
+  const [newUserForm, setNewUserForm] = useState(false);
 
   //This function is used to fetch usersData from backend
   const fetchData = async () => {
@@ -30,12 +33,6 @@ function App() {
     fetchData();
   }, []);
 
-  // //This function is used to get the userId
-  // const handleClick = (userId) => {
-  //   console.log(`User id is ${userId}`);
-  //   setUserIdToDelete(userId);
-  // };
-
   //This function is used to delete the user with given userId
   const handleDelete = async (userId) => {
     try {
@@ -55,6 +52,10 @@ function App() {
     setForm(!form);
   };
 
+  const openNewUserForm = async (userId) => {
+    setNewUserForm(!newUserForm);
+  };
+
   return (
     <div>
       {animation ? (
@@ -63,13 +64,13 @@ function App() {
         </>
       ) : (
         <>
+          <Navbar openNewUserForm={openNewUserForm} />
           <div
-            className={`${
-              form && 'brightness-50'
-            } rounded-full flex justify-center items-center`}
-            >
-              <button onClick={handleAddData}>Add</button></div>
-            <table className="bg-[#1e293b] text-white rounded-xl relative top-32 lg:w-3/4 sm:w-2/3">
+            className={`${form && 'brightness-50'} ${
+              newUserForm && 'brightness-50'
+            } relative top-8 rounded-full flex flex-col justify-center items-center`}
+          >
+            <table className="bg-[#1e293b] text-white rounded-xl lg:w-3/4 sm:w-2/3">
               <thead>
                 <tr className="">
                   <th className="px-3 py-2 text-lg">First name</th>
@@ -123,6 +124,16 @@ function App() {
                   userData={data.find((user) => user._id === userId)}
                   fetchData={fetchData}
                   setForm={setForm}
+                />
+              </div>
+            )}
+          </div>
+          <div className="flex justify-center items-center">
+            {newUserForm && (
+              <div className="absolute top-32">
+                <AddNewUser
+                  fetchData={fetchData}
+                  setNewUserForm={setNewUserForm}
                 />
               </div>
             )}
