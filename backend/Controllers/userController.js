@@ -9,7 +9,7 @@ const userValSchema = require('../Validations/userValidation');
  * @returns {Object} - JSON response indicating success or failure.
  */
 const addUser = async (req, res) => {
-  const { name, email, phone } = req.body;
+  const { firstname, lastname, email, department } = req.body;
 
   try {
     // Checking for Validations using Joi
@@ -19,13 +19,18 @@ const addUser = async (req, res) => {
     }
 
     // Taking username and password and checking if user already exists or not
-    const existingUser = await User.findOne({ name });
+    const existingUser = await User.findOne({ firstname });
     if (existingUser) {
       return res.status(409).json({ error: 'User already exists' });
     }
 
     // Creating newUser using mongoose model
-    const newUser = await User.create({ name, email, phone });
+    const newUser = await User.create({
+      firstname,
+      lastname,
+      email,
+      department,
+    });
 
     return res.status(201).json({
       message: 'User registered successfully',
@@ -40,7 +45,7 @@ const addUser = async (req, res) => {
 async function getAllUsers(req, res) {
   try {
     // Implement logic to fetch all users from the database
-    const users = await User.find();
+    const users = await User.find({});
     res.status(200).json(users);
   } catch (error) {
     console.error(error);
