@@ -18,18 +18,28 @@ const addUser = async (req, res) => {
       return res.status(400).json({ error: error.details[0].message });
     }
 
+    // Capitalize the first letter of firstname, lastname, and department
+    const capitalizedFirstname =
+      firstname.charAt(0).toUpperCase() + firstname.slice(1);
+    const capitalizedLastname =
+      lastname.charAt(0).toUpperCase() + lastname.slice(1);
+    const capitalizedDepartment =
+      department.charAt(0).toUpperCase() + department.slice(1);
+
     // Taking username and password and checking if user already exists or not
-    const existingUser = await User.findOne({ firstname });
+    const existingUser = await User.findOne({
+      firstname: capitalizedFirstname,
+    });
     if (existingUser) {
       return res.status(409).json({ error: 'User already exists' });
     }
 
     // Creating newUser using mongoose model
     const newUser = await User.create({
-      firstname,
-      lastname,
+      firstname: capitalizedFirstname,
+      lastname: capitalizedLastname,
       email,
-      department,
+      department: capitalizedDepartment,
     });
 
     return res.status(201).json({

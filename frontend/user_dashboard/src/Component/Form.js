@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Form = ({ userId, fetchData, setForm }) => {
+const Form = ({ userId, fetchData, setForm, userData }) => {
   const [formData, setFormData] = useState({
     firstname: '',
     lastname: '',
     email: '',
     department: '',
   });
+
+  useEffect(() => {
+    if (userData) {
+      setFormData({
+        firstname: userData.firstname,
+        lastname: userData.lastname,
+        email: userData.email,
+        department: userData.department,
+      });
+    }
+  }, [userData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,11 +51,13 @@ const Form = ({ userId, fetchData, setForm }) => {
   };
 
   return (
-    <div>
-      <h2>User Form</h2>
+    <div className="bg-gray-800 text-white p-4 rounded-lg w-[350px]">
+      <h2 className="text-2xl font-semibold mb-4">User Form</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="firstname">First Name:</label>
+        <div className="mb-4">
+          <label htmlFor="firstname" className="block text-lg mb-2">
+            First Name:
+          </label>
           <input
             type="text"
             id="firstname"
@@ -52,10 +65,13 @@ const Form = ({ userId, fetchData, setForm }) => {
             value={formData.firstname}
             onChange={handleChange}
             required
+            className="w-full p-2 bg-gray-700 rounded text-white"
           />
         </div>
-        <div>
-          <label htmlFor="lastname">Last Name:</label>
+        <div className="mb-4">
+          <label htmlFor="lastname" className="block text-lg mb-2">
+            Last Name:
+          </label>
           <input
             type="text"
             id="lastname"
@@ -63,10 +79,13 @@ const Form = ({ userId, fetchData, setForm }) => {
             value={formData.lastname}
             onChange={handleChange}
             required
+            className="w-full p-2 bg-gray-700 rounded text-white"
           />
         </div>
-        <div>
-          <label htmlFor="email">Email:</label>
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-lg mb-2">
+            Email:
+          </label>
           <input
             type="email"
             id="email"
@@ -74,10 +93,13 @@ const Form = ({ userId, fetchData, setForm }) => {
             value={formData.email}
             onChange={handleChange}
             required
+            className="w-full p-2 bg-gray-700 rounded text-white"
           />
         </div>
-        <div>
-          <label htmlFor="department">Department:</label>
+        <div className="mb-4">
+          <label htmlFor="department" className="block text-lg mb-2">
+            Department:
+          </label>
           <input
             type="text"
             id="department"
@@ -85,9 +107,15 @@ const Form = ({ userId, fetchData, setForm }) => {
             value={formData.department}
             onChange={handleChange}
             required
+            className="w-full p-2 bg-gray-700 rounded text-white"
           />
         </div>
-        <button type="submit">Submit</button>
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
