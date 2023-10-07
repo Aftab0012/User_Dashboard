@@ -134,7 +134,7 @@ function App() {
                 ))}
               </tbody>
             </table>
-            <div className="absolute top-[550px] pb-4">
+            <div className="absolute top-[500px] pb-4">
               {/* Pagination Component */}
               <Pagination
                 totalPosts={data.length}
