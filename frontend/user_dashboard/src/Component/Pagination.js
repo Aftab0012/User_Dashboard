@@ -29,7 +29,7 @@ const Pagination = ({
             page === currentPage
               ? 'bg-blue-500 text-white-800'
               : 'hover:bg-blue-500'
-          } ${page === currentPage ? 'font-bold bg-blue-600' : ''}`}
+          } ${page === currentPage ? 'font-bold bg-blue-700' : ''}`}
           onClick={() => setCurrentPage(page)}
         >
           {page}
