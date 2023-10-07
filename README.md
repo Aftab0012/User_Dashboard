@@ -4,7 +4,7 @@ Brief project description goes here.
 
 # working project deployed demo link
 
-- ( https://user-dashboard-86jpdtz97-aftab0012.vercel.app/ )
+- ( https://user-dashboardaftab-ghvp31zv5-aftab0012.vercel.app/ )
 
 ## Table of Contents
 
