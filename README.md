@@ -1,6 +1,4 @@
-# Project Name
-
-Brief project description goes here.
+# User Dashboard
 
 # working project deployed demo link
 
@@ -8,16 +6,11 @@ Brief project description goes here.
 
 ## Table of Contents
 
-- [Getting Started](#getting-started)
 - [Tech Stack](#tech-stack)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
-
-## Getting Started
-
-Provide a brief introduction to the project and any prerequisites or initial setup required.
 
 ### Tech Stack
 
