@@ -5,6 +5,7 @@ import validateInput from '../../Validations/validateInput';
 import { config } from '../../App';
 
 const Form = ({ userId, fetchData, setForm, userData }) => {
+  // State to hold form data
   const [formData, setFormData] = useState({
     firstname: '',
     lastname: '',
@@ -13,6 +14,7 @@ const Form = ({ userId, fetchData, setForm, userData }) => {
   });
   const { enqueueSnackbar } = useSnackbar();
 
+  // Populate the form data if userData is provided
   useEffect(() => {
     if (userData) {
       setFormData({
@@ -24,6 +26,7 @@ const Form = ({ userId, fetchData, setForm, userData }) => {
     }
   }, [userData]);
 
+  // Handle changes in input fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -32,6 +35,7 @@ const Form = ({ userId, fetchData, setForm, userData }) => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -41,6 +45,7 @@ const Form = ({ userId, fetchData, setForm, userData }) => {
         email: formData.email,
         department: formData.department,
       };
+      // Validate user input using validateInput function
       if (validateInput(data, enqueueSnackbar)) {
         const response = await axios.patch(
           `${config.endpoint}/users/${userId}`,
@@ -66,6 +71,10 @@ const Form = ({ userId, fetchData, setForm, userData }) => {
         enqueueSnackbar('Internal Server Error', { variant: 'error' });
       }
     }
+  };
+
+  const closeForm = () => {
+    setForm(false);
   };
 
   return (
@@ -128,25 +137,33 @@ const Form = ({ userId, fetchData, setForm, userData }) => {
             className="w-full p-2 text-white bg-gray-700 rounded"
           />
         </div>
-        <button
-          type="submit"
-          className={`px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 ${
-            formData.firstname === '' ||
-            formData.lastname === '' ||
-            formData.email === '' ||
-            formData.department === ''
-              ? 'opacity-50 cursor-not-allowed'
-              : ''
-          }`}
-          disabled={
-            formData.firstname === '' ||
-            formData.lastname === '' ||
-            formData.email === '' ||
-            formData.department === ''
-          }
-        >
-          Submit
-        </button>
+        <div className="flex justify-between">
+          <button
+            className="px-4 py-2 text-white bg-red-700 rounded hover:bg-red-800"
+            onClick={closeForm}
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            className={`px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 ${
+              formData.firstname === '' ||
+              formData.lastname === '' ||
+              formData.email === '' ||
+              formData.department === ''
+                ? 'opacity-50 cursor-not-allowed'
+                : ''
+            }`}
+            disabled={
+              formData.firstname === '' ||
+              formData.lastname === '' ||
+              formData.email === '' ||
+              formData.department === ''
+            }
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );

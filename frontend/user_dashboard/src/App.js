@@ -29,12 +29,14 @@ function App() {
   };
 
   useEffect(() => {
+    // Remove loading animation after a delay
     setTimeout(() => {
       setAnimation(false);
     }, 1000);
   });
 
   useEffect(() => {
+    // Fetch data when the component mounts
     fetchData();
   }, []);
 
@@ -60,6 +62,7 @@ function App() {
     setForm(!form);
   };
 
+  // Toggle the visibility of the "Add New User" form
   const openNewUserForm = async (userId) => {
     setNewUserForm(!newUserForm);
   };
@@ -71,6 +74,7 @@ function App() {
   return (
     <div>
       {animation ? (
+        // Display loading animation while data is loading
         <>
           <LoadingAnimation />
         </>
@@ -82,6 +86,7 @@ function App() {
               newUserForm && 'brightness-50'
             } relative top-8 rounded-full flex flex-col justify-center items-center`}
           >
+            {/* User Table */}
             <table className="bg-[#1e293b] text-white rounded-xl table-width">
               <thead>
                 <tr className="">
@@ -108,6 +113,7 @@ function App() {
                       {user.department}
                     </td>
                     <td className="px-3 py-2">
+                      {/* Delete Button */}
                       <button
                         onClick={() => handleDelete(user._id)}
                         className="px-2 py-1 font-semibold text-white bg-red-500 rounded hover:bg-red-600"
@@ -116,6 +122,7 @@ function App() {
                       </button>
                     </td>
                     <td className="px-3 py-2">
+                      {/* Update Button */}
                       <button
                         onClick={() => openForm(user._id)}
                         className="px-2 py-1 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600"
@@ -127,7 +134,8 @@ function App() {
                 ))}
               </tbody>
             </table>
-            <div className="absolute top-[500px]">
+            <div className="absolute top-[500px] pb-4">
+              {/* Pagination Component */}
               <Pagination
                 totalPosts={data.length}
                 setCurrentPage={setCurrentPage}
@@ -138,6 +146,7 @@ function App() {
           </div>
           <div className="flex items-center justify-center">
             {form && (
+              // Display the Update User form when 'form' is true
               <div className="absolute top-32">
                 <Form
                   userId={userId}
@@ -150,6 +159,7 @@ function App() {
           </div>
           <div className="flex items-center justify-center">
             {newUserForm && (
+              // Display the Add New User form when 'newUserForm' is true
               <div className="absolute top-32">
                 <AddNewUser
                   fetchData={fetchData}
