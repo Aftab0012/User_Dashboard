@@ -6,7 +6,6 @@ body {
 @media (min-width: 1200px) {
   .table-width {
     width: 75%;
-    height: 70vh;
   }
 }
 
