@@ -1,3 +1,31 @@
 body {
   background-color: rgb(15, 23, 42);
 }
+
+/********** Large devices only **********/
+@media (min-width: 1200px) {
+  .table-width {
+    width: 75%;
+  }
+}
+
+/********** Medium devices only **********/
+@media (min-width: 992px) and (max-width: 1199px) {
+  .table-width {
+    width: 75%;
+  }
+}
+
+/********** Small devices only **********/
+@media (min-width: 768px) and (max-width: 991px) {
+  .table-width {
+    width: 75%;
+  }
+}
+
+/********** Extra small devices only **********/
+@media (max-width: 767px) {
+  .table-width {
+    width: 75%;
+  }
+}

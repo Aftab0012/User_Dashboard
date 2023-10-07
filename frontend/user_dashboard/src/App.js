@@ -5,6 +5,7 @@ import Form from './Component/Forms/Form';
 import LoadingAnimation from './Animation/Animation';
 import AddNewUser from './Component/Forms/AddNewUser';
 import Navbar from './Navbar/Navbar';
+import { useSnackbar } from 'notistack';
 
 function App() {
   const [data, setData] = useState([]);
@@ -12,6 +13,7 @@ function App() {
   const [form, setForm] = useState(false);
   const [animation, setAnimation] = useState(true);
   const [newUserForm, setNewUserForm] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   //This function is used to fetch usersData from backend
   const fetchData = async () => {
@@ -26,10 +28,6 @@ function App() {
   });
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get('http://localhost:3002/api/users/');
-      setData(response.data);
-    };
     fetchData();
   }, []);
 
@@ -40,6 +38,11 @@ function App() {
         `http://localhost:3002/api/users/${userId}`
       );
       console.log(response.data);
+      if (response.status === 200) {
+        enqueueSnackbar('Deleted Successfull', { variant: 'success' });
+      } else {
+        enqueueSnackbar('Deletion Failed', { variant: 'error' });
+      }
       fetchData(); // Fetch updated data after deletion
     } catch (error) {
       console.log(error);
@@ -70,7 +73,7 @@ function App() {
               newUserForm && 'brightness-50'
             } relative top-8 rounded-full flex flex-col justify-center items-center`}
           >
-            <table className="bg-[#1e293b] text-white rounded-xl lg:w-3/4 sm:w-2/3">
+            <table className="bg-[#1e293b] text-white rounded-xl table-width">
               <thead>
                 <tr className="">
                   <th className="px-3 py-2 text-lg">First name</th>
@@ -84,7 +87,7 @@ function App() {
               <tbody>
                 {data.map((user) => (
                   <tr
-                    className="text-center hover:bg-gray-700 border border-black"
+                    className="text-center border border-black hover:bg-gray-700"
                     key={user._id}
                   >
                     <td className="px-3 py-2 font-semibold">
@@ -98,7 +101,7 @@ function App() {
                     <td className="px-3 py-2">
                       <button
                         onClick={() => handleDelete(user._id)}
-                        className="font-semibold bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded"
+                        className="px-2 py-1 font-semibold text-white bg-red-500 rounded hover:bg-red-600"
                       >
                         Delete
                       </button>
@@ -106,9 +109,9 @@ function App() {
                     <td className="px-3 py-2">
                       <button
                         onClick={() => openForm(user._id)}
-                        className="font-semibold bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded"
+                        className="px-2 py-1 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600"
                       >
-                        Update
+                        Edit
                       </button>
                     </td>
                   </tr>
@@ -116,7 +119,7 @@ function App() {
               </tbody>
             </table>
           </div>
-          <div className="flex justify-center items-center">
+          <div className="flex items-center justify-center">
             {form && (
               <div className="absolute top-32">
                 <Form
@@ -128,7 +131,7 @@ function App() {
               </div>
             )}
           </div>
-          <div className="flex justify-center items-center">
+          <div className="flex items-center justify-center">
             {newUserForm && (
               <div className="absolute top-32">
                 <AddNewUser
