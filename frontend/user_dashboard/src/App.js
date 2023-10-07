@@ -9,7 +9,7 @@ import { useSnackbar } from 'notistack';
 import Pagination from './Component/Pagination';
 
 export const config = {
-  endpoint: `http://localhost:3002/api`,
+  endpoint: `https://user-dashboard-ycfa.onrender.com/api`,
 };
 
 function App() {
