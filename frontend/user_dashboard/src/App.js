@@ -6,6 +6,7 @@ import LoadingAnimation from './Animation/Animation';
 import AddNewUser from './Component/Forms/AddNewUser';
 import Navbar from './Navbar/Navbar';
 import { useSnackbar } from 'notistack';
+import Pagination from './Component/Pagination';
 
 export const config = {
   endpoint: `http://localhost:3002/api`,
@@ -18,6 +19,9 @@ function App() {
   const [animation, setAnimation] = useState(true);
   const [newUserForm, setNewUserForm] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage, setPostPerPage] = useState(8);
+
   //This function is used to fetch usersData from backend
   const fetchData = async () => {
     const response = await axios.get(`${config.endpoint}/users`);
@@ -27,7 +31,7 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       setAnimation(false);
-    }, 3000);
+    }, 1000);
   });
 
   useEffect(() => {
@@ -60,6 +64,10 @@ function App() {
     setNewUserForm(!newUserForm);
   };
 
+  const lastPostIndex = currentPage * postPerPage;
+  const firstPostIndex = lastPostIndex - postPerPage;
+  const currentPosts = data.slice(firstPostIndex, lastPostIndex);
+
   return (
     <div>
       {animation ? (
@@ -86,7 +94,7 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {data.map((user) => (
+                {currentPosts.map((user) => (
                   <tr
                     className="text-center border border-black hover:bg-gray-700"
                     key={user._id}
@@ -112,13 +120,21 @@ function App() {
                         onClick={() => openForm(user._id)}
                         className="px-2 py-1 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600"
                       >
-                        Edit
+                        Update
                       </button>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            <div className="absolute top-[500px]">
+              <Pagination
+                totalPosts={data.length}
+                setCurrentPage={setCurrentPage}
+                postsPerPage={postPerPage}
+                currentPage={currentPage}
+              />
+            </div>
           </div>
           <div className="flex items-center justify-center">
             {form && (
