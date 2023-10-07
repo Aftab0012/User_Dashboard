@@ -81,6 +81,8 @@ Your project should now be running locally. Open your web browser and access it 
 
 - Optimization: I would have done more optimizationto make more modular if i had given more time.
 
+- Animations: I could have added more 3D and cool looking animations if had given more time.
+
 - Testing: If i had given more time i would have added unit and integration testing.
 
 ### In this project i have already added more than neough feature for a (DASHBOARD) app so i think in future i can add more features to this without any problem
