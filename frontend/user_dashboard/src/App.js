@@ -7,6 +7,10 @@ import AddNewUser from './Component/Forms/AddNewUser';
 import Navbar from './Navbar/Navbar';
 import { useSnackbar } from 'notistack';
 
+export const config = {
+  endpoint: `http://localhost:3002/api`,
+};
+
 function App() {
   const [data, setData] = useState([]);
   const [userId, setUserId] = useState('');
@@ -14,10 +18,9 @@ function App() {
   const [animation, setAnimation] = useState(true);
   const [newUserForm, setNewUserForm] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
-
   //This function is used to fetch usersData from backend
   const fetchData = async () => {
-    const response = await axios.get('http://localhost:3002/api/users/');
+    const response = await axios.get(`${config.endpoint}/users`);
     setData(response.data);
   };
 
@@ -34,9 +37,7 @@ function App() {
   //This function is used to delete the user with given userId
   const handleDelete = async (userId) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:3002/api/users/${userId}`
-      );
+      const response = await axios.delete(`${config.endpoint}/users/${userId}`);
       console.log(response.data);
       if (response.status === 200) {
         enqueueSnackbar('Deleted Successfull', { variant: 'success' });

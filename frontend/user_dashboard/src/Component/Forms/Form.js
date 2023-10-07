@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import validateInput from '../../Validations/validateInput';
+import { config } from '../../App';
 
 const Form = ({ userId, fetchData, setForm, userData }) => {
   const [formData, setFormData] = useState({
@@ -42,7 +43,7 @@ const Form = ({ userId, fetchData, setForm, userData }) => {
       };
       if (validateInput(data, enqueueSnackbar)) {
         const response = await axios.patch(
-          `http://localhost:3002/api/users/${userId}`,
+          `${config.endpoint}/users/${userId}`,
           formData
         );
         console.log(response.data);

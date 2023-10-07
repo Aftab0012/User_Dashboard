@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import validateInput from '../../Validations/validateInput';
+import { config } from '../../App';
 
 const Form = ({ fetchData, setNewUserForm }) => {
   const [formData, setFormData] = useState({
@@ -31,7 +32,7 @@ const Form = ({ fetchData, setNewUserForm }) => {
       };
       if (validateInput(data, enqueueSnackbar)) {
         const response = await axios.post(
-          `http://localhost:3002/api/users/add`,
+          `${config.endpoint}/users/add`,
           formData
         );
         console.log(response.data);
