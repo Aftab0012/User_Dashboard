@@ -20,7 +20,7 @@ function App() {
   const [newUserForm, setNewUserForm] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage, setPostPerPage] = useState(8);
+  const [postPerPage] = useState(8);
 
   //This function is used to fetch usersData from backend
   const fetchData = async () => {
@@ -116,7 +116,7 @@ function App() {
                       {/* Delete Button */}
                       <button
                         onClick={() => handleDelete(user._id)}
-                        className="px-2 py-1 font-semibold text-white bg-red-500 rounded hover:bg-red-600"
+                        className="px-4 py-1 font-semibold text-white bg-red-500 rounded hover:bg-red-600"
                       >
                         Delete
                       </button>
@@ -125,7 +125,7 @@ function App() {
                       {/* Update Button */}
                       <button
                         onClick={() => openForm(user._id)}
-                        className="px-2 py-1 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600"
+                        className="px-4 py-1 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600"
                       >
                         Update
                       </button>
@@ -134,7 +134,7 @@ function App() {
                 ))}
               </tbody>
             </table>
-            <div className="absolute top-[500px] pb-4">
+            <div className="absolute top-[550px] pb-4">
               {/* Pagination Component */}
               <Pagination
                 totalPosts={data.length}

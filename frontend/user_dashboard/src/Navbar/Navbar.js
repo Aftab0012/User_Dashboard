@@ -14,7 +14,7 @@ const Navbar = ({ openNewUserForm }) => {
       <div className="mt-2 md:mt-0">
         <button
           onClick={openNewUserForm}
-          className="px-6 py-2 font-bold text-white bg-green-500 rounded-md outline-none hover:bg-green-600 md:px-4 md:py-1"
+          className="px-6 py-2 font-bold text-white bg-green-500 rounded-md outline-none hover:bg-green-600 md:px-6 md:py-2"
         >
           Add
         </button>
