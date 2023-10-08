@@ -32,12 +32,10 @@ function App() {
   // Fetch data when the component mounts
   fetchData()
     .then(() => {
-      // Remove loading animation after data is fetched
       setAnimation(false);
     })
     .catch((error) => {
-      
-      console.error('Error fetching data:', error);q
+      console.error('Error fetching data:', error);
       setAnimation(false);
     });
 }, []);
