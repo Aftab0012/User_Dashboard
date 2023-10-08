@@ -66,7 +66,7 @@
 
 Your project should now be running locally. Open your web browser and access it at `http://localhost:3000`.
 
-## Improvents
+## Improvements
 
 ### If more time were available, there are several potential improvements that could be made to enhance this project:
 
