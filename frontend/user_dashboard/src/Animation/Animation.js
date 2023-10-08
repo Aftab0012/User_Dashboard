@@ -12,7 +12,7 @@ const LoadingAnimation = () => {
         <div className="waveform__bar"></div>
       </div>
       <p className="mt-8 ml-5 text-white text-center font-bold text-2xl">
-        Loadings...
+        Loading...
       </p>
     </div>
   );
