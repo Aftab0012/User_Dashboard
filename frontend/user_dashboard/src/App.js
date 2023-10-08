@@ -29,11 +29,18 @@ function App() {
   };
 
   useEffect(() => {
-    // Remove loading animation after a delay
-    setTimeout(() => {
+  // Fetch data when the component mounts
+  fetchData()
+    .then(() => {
+      // Remove loading animation after data is fetched
       setAnimation(false);
-    }, 1000);
-  });
+    })
+    .catch((error) => {
+      
+      console.error('Error fetching data:', error);q
+      setAnimation(false);
+    });
+}, []);
 
   useEffect(() => {
     // Fetch data when the component mounts
