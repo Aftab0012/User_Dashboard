@@ -2,7 +2,7 @@
 
 # working project deployed demo link
 
-- ( https://user-dashboardaftab-ghvp31zv5-aftab0012.vercel.app/ )
+- ( https://user-dashboardaftab-git-master-aftab0012.vercel.app/ )
 
 ## Table of Contents
 
