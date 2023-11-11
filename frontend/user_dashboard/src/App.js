@@ -7,9 +7,11 @@ import AddNewUser from './Component/Forms/AddNewUser';
 import Navbar from './Navbar/Navbar';
 import { useSnackbar } from 'notistack';
 import Pagination from './Component/Pagination';
+import SmallDevice from './Component/small devices layout/SmallDevice';
 
 export const config = {
-  endpoint: `https://user-dashboard-ycfa.onrender.com/api`,
+  // endpoint: `http://user-dashboard-ycfa.onrender.com/api`,
+  endpoint: `http://localhost:3002/api`,
 };
 
 function App() {
@@ -30,9 +32,14 @@ function App() {
 
   useEffect(() => {
     // Remove loading animation after a delay
-    setTimeout(() => {
-      setAnimation(false);
-    }, 1000);
+    fetchData()
+      .then(() => {
+        setAnimation(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setAnimation(false);
+      });
   });
 
   useEffect(() => {
@@ -87,54 +94,67 @@ function App() {
             } relative top-8 rounded-full flex flex-col justify-center items-center`}
           >
             {/* User Table */}
-            <table className="bg-[#1e293b] text-white rounded-xl table-width">
-              <thead>
-                <tr className="">
-                  <th className="px-3 py-2 text-lg">First name</th>
-                  <th className="px-3 py-2 text-lg">Last name</th>
-                  <th className="px-3 py-2 text-lg">E-mail</th>
-                  <th className="px-3 py-2 text-lg">Department</th>
-                  <th className="px-3 py-2 text-lg">Delete</th>
-                  <th className="px-3 py-2 text-lg">Update</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentPosts.map((user) => (
-                  <tr
-                    className="text-center border border-black hover:bg-gray-700"
-                    key={user._id}
-                  >
-                    <td className="px-3 py-2 font-semibold">
-                      {user.firstname}
-                    </td>
-                    <td className="px-3 py-2 font-semibold">{user.lastname}</td>
-                    <td className="px-3 py-2 font-semibold">{user.email}</td>
-                    <td className="px-3 py-2 font-semibold">
-                      {user.department}
-                    </td>
-                    <td className="px-3 py-2">
-                      {/* Delete Button */}
-                      <button
-                        onClick={() => handleDelete(user._id)}
-                        className="px-4 py-1 font-semibold text-white bg-red-500 rounded hover:bg-red-600"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                    <td className="px-3 py-2">
-                      {/* Update Button */}
-                      <button
-                        onClick={() => openForm(user._id)}
-                        className="px-4 py-1 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600"
-                      >
-                        Update
-                      </button>
-                    </td>
+            <div className="flex justify-center w-[500px] md:w-full custom-display">
+              <table className="bg-[#1e293b] text-white rounded-xl table-width shadow-2xl">
+                <thead>
+                  <tr className="">
+                    <th className="px-3 py-2 text-lg">First name</th>
+                    <th className="px-3 py-2 text-lg">Last name</th>
+                    <th className="px-3 py-2 text-lg">E-mail</th>
+                    <th className="px-3 py-2 text-lg">Department</th>
+                    <th className="px-3 py-2 text-lg">Delete</th>
+                    <th className="px-3 py-2 text-lg">Update</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="absolute top-[500px] pb-4">
+                </thead>
+                <tbody>
+                  {currentPosts.map((user) => (
+                    <tr
+                      className="text-center border border-black hover:bg-gray-700"
+                      key={user._id}
+                    >
+                      <td className="px-3 py-2 font-semibold ">
+                        {user.firstname}
+                      </td>
+                      <td className="px-3 py-2 font-semibold ">
+                        {user.lastname}
+                      </td>
+                      <td className="px-3 py-2 font-semibold ">{user.email}</td>
+                      <td className="px-3 py-2 font-semibold ">
+                        {user.department}
+                      </td>
+                      <td className="px-3 py-2">
+                        {/* Delete Button */}
+                        <button
+                          onClick={() => handleDelete(user._id)}
+                          className="px-4 py-1 font-semibold text-white bg-red-500 rounded hover:bg-red-600"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                      <td className="px-3 py-2">
+                        {/* Update Button */}
+                        <button
+                          onClick={() => openForm(user._id)}
+                          className="px-4 py-1 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600"
+                        >
+                          Update
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="sm:hidden">
+              <SmallDevice
+                currentPosts={currentPosts}
+                openForm={openForm}
+                handleDelete={handleDelete}
+              />
+            </div>
+
+            <div className="absolute top-[500px] pb-4 custom-position">
               {/* Pagination Component */}
               <Pagination
                 totalPosts={data.length}
@@ -144,6 +164,7 @@ function App() {
               />
             </div>
           </div>
+
           <div className="flex items-center justify-center">
             {form && (
               // Display the Update User form when 'form' is true
@@ -157,6 +178,7 @@ function App() {
               </div>
             )}
           </div>
+
           <div className="flex items-center justify-center">
             {newUserForm && (
               // Display the Add New User form when 'newUserForm' is true

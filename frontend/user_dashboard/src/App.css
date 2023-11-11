@@ -17,15 +17,19 @@ body {
 }
 
 /********** Small devices only **********/
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 639px) and (max-width: 991px) {
   .table-width {
     width: 75%;
   }
 }
 
 /********** Extra small devices only **********/
-@media (max-width: 767px) {
-  .table-width {
-    width: 75%;
+@media (max-width: 639px) {
+  .custom-display {
+    display: none;
+  }
+  .custom-position {
+    position: absolute;
+    top: 110%;
   }
 }

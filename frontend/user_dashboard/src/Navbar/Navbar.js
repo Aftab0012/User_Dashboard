@@ -7,9 +7,12 @@ import React from 'react';
  */
 const Navbar = ({ openNewUserForm }) => {
   return (
-    <div className="flex flex-row sm:justify-between justify-around items-center px-7 py-3 w-screen bg-[#1e293b]">
+    <div className="flex flex-row sm:justify-between justify-between items-center px-7 py-5 w-screen bg-[#1e293b]">
       <p className="font-mono text-4xl font-bold text-white md:mb-0">
-        DashBoard
+        {/* <span className="py-2 pl-2 pr-1 mr-2 font-mono text-black bg-orange-600 rounded-xl"> */}
+        Dash
+        {/* </span> */}
+        Board
       </p>
       <div className="mt-2 md:mt-0">
         <button
