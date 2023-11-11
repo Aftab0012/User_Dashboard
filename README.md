@@ -1,23 +1,16 @@
-# Project Name
-
-Brief project description goes here.
+# User Dashboard
 
 # working project deployed demo link
 
-- ( https://user-dashboardaftab-ghvp31zv5-aftab0012.vercel.app/ )
+- ( https://user-dashboardaftab-git-master-aftab0012.vercel.app/ )
 
 ## Table of Contents
 
-- [Getting Started](#getting-started)
 - [Tech Stack](#tech-stack)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
-
-## Getting Started
-
-Provide a brief introduction to the project and any prerequisites or initial setup required.
 
 ### Tech Stack
 
@@ -73,7 +66,7 @@ Provide a brief introduction to the project and any prerequisites or initial set
 
 Your project should now be running locally. Open your web browser and access it at `http://localhost:3000`.
 
-## Improvents
+## Improvements
 
 ### If more time were available, there are several potential improvements that could be made to enhance this project:
 
