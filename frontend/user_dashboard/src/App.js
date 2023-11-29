@@ -28,7 +28,6 @@ function App() {
   const fetchData = async () => {
     const response = await axios.get(`${config.endpoint}/users`);
     setData(response.data);
-    setAnimation(false)
   };
 
   useEffect(() => {
