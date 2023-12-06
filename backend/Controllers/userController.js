@@ -27,8 +27,10 @@ const addUser = async (req, res) => {
       department.charAt(0).toUpperCase() + department.slice(1);
 
     // Taking username and password and checking if user already exists or not
+
+    // Commented out uncomment it later fo unique names
     const existingUser = await User.findOne({
-      firstname: capitalizedFirstname,
+      email: email,
     });
     if (existingUser) {
       return res.status(409).json({ error: 'User already exists' });
