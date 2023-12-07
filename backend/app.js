@@ -18,15 +18,10 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
-const corsOptions = {
-  origin: 'http://localhost:3000', // Replace with your frontend's origin
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Enable credentials (cookies, authorization headers, etc.)
-  optionsSuccessStatus: 204, // Set the preflight success status to 204
-};
-app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 
 app.use('/api', routes);
 app.listen(PORT, () => {
