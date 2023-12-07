@@ -10,8 +10,8 @@ import Pagination from './Component/Pagination';
 import SmallDevice from './Component/small devices layout/SmallDevice';
 
 export const config = {
-  endpoint: `http://user-dashboard-ycfa.onrender.com/api`,
-  // endpoint: `http://localhost:3002/api`,
+  // endpoint: `http://user-dashboard-ycfa.onrender.com/api`,
+  endpoint: `https://dashboard-442y.onrender.com/api`,
 };
 
 function App() {
